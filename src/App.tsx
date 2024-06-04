@@ -1,20 +1,17 @@
+import Contato from './components/Contato'
+import Formulario from './components/Formulario'
+import Header from './components/Header'
+import EstiloGlobal from './styles'
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <EstiloGlobal />
+      <Header />
+      <Formulario />
+      <Contato />
+      <Contato />
+    </>
   )
 }
 
