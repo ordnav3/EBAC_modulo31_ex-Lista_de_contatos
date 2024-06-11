@@ -1,30 +1,55 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { BsPersonSquare } from 'react-icons/bs'
+
+import { RootState } from '../../store'
 
 import * as style from './style'
 import { Container } from '../../styles'
+import { excluir } from '../../store/reducers/contato'
 
-const Contato = () => {
+interface ContatoProps {
+  setEditingContactId: (id: number | undefined) => void
+}
+
+const Contato: React.FC<ContatoProps> = ({ setEditingContactId }) => {
+  const contatos = useSelector((state: RootState) => state.contatos.contatos)
+  const dispatch = useDispatch()
+
+  const excluirContato = (id: number) => {
+    dispatch(excluir(id))
+  }
+
+  const editarContato = (id: number) => {
+    setEditingContactId(id)
+  }
   return (
-    <Container>
-      <style.ListaContato>
-        <style.Ref>
-          <style.Icon>
-            <BsPersonSquare />
-          </style.Icon>
+    <>
+      {contatos.map((contato) => (
+        <Container key={contato.id}>
+          <style.ListaContato>
+            <style.Ref>
+              <style.Icon>
+                <BsPersonSquare />
+              </style.Icon>
+              <style.Infos>
+                <style.Nome>{contato.nome}</style.Nome>
+                <li>{contato.email}</li>
+                <li>{contato.telefone}</li>
+              </style.Infos>
+            </style.Ref>
 
-          <style.Infos>
-            <style.Nome>Evandro Santos Afonso</style.Nome>
-            <li>melhor.evandro@gmail.com</li>
-            <li>11948274717</li>
-          </style.Infos>
-        </style.Ref>
-
-        <style.Exe>
-          <style.Editar>Editar</style.Editar>
-          <style.Excluir>Excluir</style.Excluir>
-        </style.Exe>
-      </style.ListaContato>
-    </Container>
+            <style.Exe>
+              <style.Editar onClick={() => editarContato(contato.id)}>
+                Edit
+              </style.Editar>
+              <style.Excluir onClick={() => excluirContato(contato.id)}>
+                Delete
+              </style.Excluir>
+            </style.Exe>
+          </style.ListaContato>
+        </Container>
+      ))}
+    </>
   )
 }
 
