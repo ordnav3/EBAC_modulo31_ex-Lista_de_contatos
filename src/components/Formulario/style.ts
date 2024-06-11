@@ -19,6 +19,10 @@ export const Input = styled.input`
   border: none;
   border-radius: 8px;
   margin-right: 10px;
+
+  @media screen {
+    margin-bottom: 8px;
+  }
 `
 
 export const BotaoAd = styled(Botao)`
